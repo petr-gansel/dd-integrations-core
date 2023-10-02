@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+***Fixed***:
+
+* Fix Github API search query ([#15943](https://github.com/DataDog/integrations-core/pull/15943))
+
 ## 5.1.1 / 2023-09-29
 
 ***Fixed***:
