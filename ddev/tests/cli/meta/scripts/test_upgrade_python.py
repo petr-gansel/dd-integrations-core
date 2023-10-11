@@ -5,8 +5,8 @@ from collections import defaultdict
 
 
 def test_upgrade_python(fake_repo, ddev):
-    new_version = "3.11"
-    old_version = "3.9"
+    new_version = "3.12"
+    old_version = "3.11"
 
     constant_file = fake_repo.path / 'ddev' / 'src' / 'ddev' / 'repo' / 'constants.py'
     contents = constant_file.read_text()

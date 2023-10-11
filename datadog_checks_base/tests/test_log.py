@@ -35,7 +35,7 @@ def test_logging_capture_warnings():
 
         warnings.warn("hello-world")  # noqa: B028
         assert log_warning.call_count == 1
-        msg = log_warning.mock_calls[0].args[1]
+        msg = log_warning.mock_calls[0].args[0]
         assert "hello-world" in msg
 
 

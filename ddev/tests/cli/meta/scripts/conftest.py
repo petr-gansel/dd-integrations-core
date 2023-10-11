@@ -30,7 +30,7 @@ FULL_NAMES = {
 }
 
 # This is automatically maintained
-PYTHON_VERSION = '3.9'
+PYTHON_VERSION = '3.11'
 """,
     )
 
@@ -40,7 +40,7 @@ PYTHON_VERSION = '3.9'
         """[env.collectors.datadog-checks]
 
 [[envs.default.matrix]]
-python = ["2.7", "3.9"]
+python = ["2.7", "3.11"]
 
 """,
     )
@@ -58,7 +58,7 @@ classifiers = [
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 2.7",
-    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.11",
 ]
 """,
     )
@@ -69,7 +69,7 @@ classifiers = [
         """name: build ddev
 env:
   APP_NAME: ddev
-  PYTHON_VERSION: "3.9"
+  PYTHON_VERSION: "3.11"
   PYOXIDIZER_VERSION: "0.24.0"
 """,
     )
@@ -78,10 +78,10 @@ env:
         repo_path / 'ddev',
         'pyproject.toml',
         """[tool.black]
-target-version = ["py39"]
+target-version = ["py311"]
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py311"
 """,
     )
 
@@ -106,7 +106,7 @@ classifiers = [
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 2.7",
-    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.11",
 ]
 """,
     )
