@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+***Changed***:
+
+* Update the Kubernetes Overview dashboard to the new responsive-grid layout ([#16013](https://github.com/DataDog/integrations-core/pull/16013))
+
 ## 1.7.0 / 2020-05-17
 
 ***Added***:
