@@ -11,6 +11,7 @@ import win32security
 from six import PY2
 
 from datadog_checks.base import AgentCheck, ConfigurationError, is_affirmative
+from datadog_checks.base.errors import SkipInstanceError
 from datadog_checks.base.utils.common import exclude_undefined_keys
 from datadog_checks.base.utils.time import get_timestamp
 
@@ -71,12 +72,18 @@ class Win32EventLogCheck(AgentCheck, ConfigMixin):
 
         # default to legacy mode for configuration backwards compatibility
         init_config_legacy_mode = is_affirmative(init_config.get('legacy_mode', True))
+        init_config_legacy_mode_v2 = is_affirmative(init_config.get('legacy_mode_v2', False))
         # If legacy_mode is unset for an instance, default to the init_config option
         instance_legacy_mode = is_affirmative(instance.get('legacy_mode', init_config_legacy_mode))
+        instance_legacy_mode_v2 = is_affirmative(instance.get('legacy_mode_v2', init_config_legacy_mode_v2))
         if PY2 or instance_legacy_mode:
             return Win32EventLogWMI(name, init_config, instances)
-        else:
+        elif instance_legacy_mode_v2:
             return super(Win32EventLogCheck, cls).__new__(cls)
+        else:
+            raise SkipInstanceError(
+                "Set the legacy_mode and legacy_mode_v2 options to configure the implementation to use."
+            )
 
     def __init__(self, name, init_config, instances):
         super(Win32EventLogCheck, self).__init__(name, init_config, instances)
@@ -283,7 +290,6 @@ class Win32EventLogCheck(AgentCheck, ConfigMixin):
 
     def poll_events(self):
         while True:
-
             # IMPORTANT: the subscription starts immediately so you must consume before waiting for the first signal
             while True:
                 # https://docs.microsoft.com/en-us/windows/win32/api/winevt/nf-winevt-evtnext
